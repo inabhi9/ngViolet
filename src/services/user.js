@@ -7,7 +7,7 @@
     'use strict';
 
     angular
-        .module('ngViolet')
+        .module('ngViolet', [])
         .service('UserService', UserService);
 
     function UserService($window) {

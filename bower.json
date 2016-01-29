@@ -5,7 +5,7 @@
   ],
   "description": "College of useful angular directives / services",
   "main": [
-    "services/user.js"
+    "src/services/user.js"
   ],
   "moduleType": [],
   "license": "MIT",
