@@ -5,7 +5,8 @@
   ],
   "description": "College of useful angular directives / services",
   "main": [
-    "src/services/user.js"
+    "src/services/user.js",
+    "src/services/pagination.js"
   ],
   "moduleType": [],
   "license": "MIT",
