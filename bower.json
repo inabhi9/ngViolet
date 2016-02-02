@@ -7,8 +7,8 @@
   "main": [
     "src/services/user.js",
     "src/services/pagination.js",
-    "src/services/categoryCollapsible.js",
-    "src/services/stringToNumber.js"
+    "src/directives/categoryCollapsible.js",
+    "src/directives/stringToNumber.js"
   ],
   "moduleType": [],
   "license": "MIT",
