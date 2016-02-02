@@ -87,7 +87,11 @@
 
             function remove(id) {
                 return options.api.remove(id).then(function () {
-                    notify.info(options.title + ' deleted successfully', 'Delete ' + options.title);
+                    if (angular.isDefined(options.notify))
+                        options.notify.info(
+                            options.title + ' deleted successfully',
+                            'Delete ' + options.title
+                        );
 
                     // Don't blatantly refresh resource but check if page contains only one item and
                     // it's deleted we should move to the previous page
