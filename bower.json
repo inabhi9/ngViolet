@@ -6,7 +6,9 @@
   "description": "College of useful angular directives / services",
   "main": [
     "src/services/user.js",
-    "src/services/pagination.js"
+    "src/services/pagination.js",
+    "src/services/categoryCollapsible.js",
+    "src/services/stringToNumber.js"
   ],
   "moduleType": [],
   "license": "MIT",
