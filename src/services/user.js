@@ -66,6 +66,16 @@
         this.set = function (data) {
             this.login(data);
         };
+        
+        this.savePref = function(key, val){
+            key = vm.get().id + '_' + key;
+            localStorage.setItem(key, angular.toJson(val));
+        };
+
+        this.getPref = function(key){
+            key = vm.get().id + '_' + key;
+            return angular.fromJson(localStorage.getItem(key));
+        }
     }
 })();
 
