@@ -7,25 +7,41 @@
     'use strict';
 
     angular
-        .module('ngViolet', [])
-        .service('UserService', UserService);
+        .module('ngViolet', ['ngCookies'])
+        .service('UserService', ['$window', '$cookies', UserService]);
 
-    function UserService($window) {
+    function UserService($window, $cookies) {
         var vm = this;
+
+        var cookieStorage = {
+            setItem   : function (key, value) {
+                $cookies.put(key, value, {expire: new Date([2099, 1, 1])});
+            },
+            getItem   : function (key) {
+                return $cookies.get(key);
+            },
+            removeItem: function (key) {
+                $cookies.remove(key)
+            }
+        };
 
         var storage = {
             setItem   : function (key, value, withLocalStorage) {
                 if (typeof(value) == 'object')
                     value = angular.toJson(value);
-
-                $window.sessionStorage.setItem(key, value);
-                if (withLocalStorage === true)
-                    localStorage.setItem(key, value);
+                try {
+                    $window.sessionStorage.setItem(key, value);
+                    if (withLocalStorage === true)
+                        localStorage.setItem(key, value);
+                } catch (e) {
+                    cookieStorage.setItem(key, value);
+                }
             },
             getItem   : function (key) {
                 var sValue = $window.sessionStorage.getItem(key);
                 var lValue = localStorage.getItem(key);
-                var value = sValue || lValue;
+                var cValue = cookieStorage.getItem(key);
+                var value = sValue || lValue || cValue;
 
                 try {
                     return angular.fromJson(value);
@@ -36,6 +52,7 @@
             removeItem: function (key) {
                 $window.sessionStorage.removeItem(key);
                 localStorage.removeItem(key);
+                cookieStorage.removeItem(key);
             }
         };
 
@@ -66,15 +83,15 @@
         this.set = function (data) {
             this.login(data);
         };
-        
-        this.savePref = function(key, val){
+
+        this.savePref = function (key, val) {
             key = vm.get().id + '_' + key;
-            localStorage.setItem(key, angular.toJson(val));
+            $cookies.putObject(key, val);
         };
 
-        this.getPref = function(key){
+        this.getPref = function (key) {
             key = vm.get().id + '_' + key;
-            return angular.fromJson(localStorage.getItem(key));
+            return $cookies.getObject(key);
         }
     }
 })();
