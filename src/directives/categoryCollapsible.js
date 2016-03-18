@@ -15,10 +15,14 @@
             priority: -1,
             restrict: 'E',
             scope   : {
-                items: '='
+                items: '=',
+                expanded: '@'
             },
             link    : function ($scope) {
                 $scope.ui = {items: []};
+                if ($scope.expanded == 'true'){
+                    $scope.ui.items[$scope.id] = true;
+                }
             },
             template: '<div ng-if="items.length"' +
             'class="label label-info label-sm margin-right-5">' +
