@@ -32,11 +32,11 @@
             'ng-show="ui.items[$this.id]==true"' +
             'class="label label-info label-sm margin-right-5">' +
             '{{c.name}}</div>' +
-            '<button ng-if="items.length>1"' +
+            '<a ng-if="items.length>1"' +
             'class="btn btn-default btn-xs margin-right-5"' +
             'ng-click="ui.items[$this.id]=!ui.items[$this.id]">' +
             '...' +
-            '</button>'
+            '</a>'
         };
     }
 })();
